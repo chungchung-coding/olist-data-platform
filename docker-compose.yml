@@ -1,0 +1,14 @@
+# Optional local PostgreSQL (from the architecture diagram's "supporting infrastructure").
+# Not required for the DuckDB or BigQuery paths; useful if you want a third dbt target
+# (add a `postgres` output to dbt/olist_dbt/profiles.yml and `pip install dbt-postgres`).
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: olist
+      POSTGRES_PASSWORD: olist
+      POSTGRES_DB: olist
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+volumes:
+  pgdata:

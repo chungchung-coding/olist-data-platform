@@ -1,0 +1,58 @@
+name: pipeline-ci
+
+# Runs the whole pipeline on DuckDB on every push/PR to main, and nightly.
+# The CSVs are not committed (too large for git), so CI downloads them from
+# Kaggle using the KAGGLE_USERNAME / KAGGLE_KEY repository secrets.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 6 * * *"   # 06:00 UTC daily
+  workflow_dispatch:
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Download raw data from Kaggle
+        env:
+          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+        run: |
+          pip install kaggle
+          kaggle datasets download -d olistbr/brazilian-ecommerce -p data/raw --unzip
+
+      - name: Ingest raw layer (DuckDB)
+        run: python ingestion/load_raw_duckdb.py
+
+      - name: dbt build (run + test)
+        working-directory: dbt/olist_dbt
+        env:
+          DBT_PROFILES_DIR: .
+          DBT_TARGET: duckdb
+        run: dbt build --target duckdb
+
+      - name: Great Expectations quality gate
+        run: python quality/run_great_expectations.py
+
+      - name: Analysis outputs
+        working-directory: analysis
+        run: python run_analysis.py
+
+      - name: Upload charts and KPIs
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-outputs
+          path: analysis/outputs/

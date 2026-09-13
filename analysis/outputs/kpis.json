@@ -1,0 +1,116 @@
+{
+  "sales_readiness": {
+    "peak_month": "2017-11",
+    "peak_month_revenue": 1172191.68,
+    "total_revenue_2017": 7090569.24,
+    "total_revenue_2018_ytd": 8593137.5,
+    "strongest_month_of_year": 11,
+    "products_ever_in_top50": 634,
+    "products_in_top50_6plus_months": 21,
+    "top50_categories": {
+      "watches_gifts": 394154.0,
+      "health_beauty": 332991.0,
+      "computers_accessories": 269442.0,
+      "computers": 205032.0,
+      "cool_stuff": 162797.0
+    },
+    "top_categories_overall": {
+      "health_beauty": 1255695.0,
+      "watches_gifts": 1198185.0,
+      "bed_bath_table": 1035964.0,
+      "sports_leisure": 979741.0,
+      "computers_accessories": 904322.0
+    },
+    "top_states_revenue_share": {
+      "SP": 0.383,
+      "RJ": 0.134,
+      "MG": 0.117,
+      "RS": 0.055,
+      "PR": 0.05
+    },
+    "segments": {
+      "silver": {
+        "customers": 23958,
+        "revenue_share": 0.308,
+        "avg_ltv": 202.041
+      },
+      "gold": {
+        "customers": 12084,
+        "revenue_share": 0.302,
+        "avg_ltv": 392.636
+      },
+      "lapsed": {
+        "customers": 23145,
+        "revenue_share": 0.238,
+        "avg_ltv": 161.573
+      },
+      "standard": {
+        "customers": 34938,
+        "revenue_share": 0.141,
+        "avg_ltv": 63.433
+      },
+      "repeat": {
+        "customers": 865,
+        "revenue_share": 0.012,
+        "avg_ltv": 224.951
+      }
+    },
+    "repeat_customer_rate": 0.0304,
+    "gold_customers": 12084,
+    "gold_revenue_share": 0.3015,
+    "gold_top_states": {
+      "SP": 0.373,
+      "RJ": 0.129,
+      "MG": 0.116,
+      "RS": 0.055,
+      "PR": 0.052
+    },
+    "gold_top_categories": {
+      "watches_gifts": 478976.0,
+      "health_beauty": 470290.0,
+      "sports_leisure": 271648.0,
+      "computers_accessories": 238245.0,
+      "bed_bath_table": 237355.0
+    },
+    "sellers_for_80pct_revenue": 540,
+    "seller_count": 3053
+  },
+  "delivery_readiness": {
+    "national_avg_delivery_days": 12.5,
+    "national_late_rate": 0.0811,
+    "slowest_states": {
+      "RR": 29.3,
+      "AP": 27.2,
+      "AM": 26.4,
+      "AL": 24.5,
+      "PA": 23.7
+    },
+    "highest_late_rate_states": {
+      "AL": 0.239,
+      "MA": 0.197,
+      "PI": 0.16,
+      "CE": 0.153,
+      "SE": 0.152
+    },
+    "fastest_states": {
+      "MG": 11.9,
+      "PR": 11.9,
+      "SP": 8.7
+    },
+    "national_leg_days": {
+      "approval": 0.51,
+      "seller": 2.7,
+      "carrier": 9.28
+    },
+    "avg_review_on_time_vs_late": {
+      "false": 4.29,
+      "true": 2.57
+    },
+    "worst_late_month": "2018-03",
+    "worst_late_month_rate": 0.2087,
+    "avg_estimated_vs_actual_days": {
+      "est": 24.4,
+      "act": 12.5
+    }
+  }
+}

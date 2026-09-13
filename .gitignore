@@ -1,0 +1,29 @@
+# raw data and local warehouse are not committed (download from Kaggle; rebuild with `make all`)
+data/raw/*.csv
+data/warehouse/*.duckdb
+data/warehouse/*.wal
+
+# dbt
+dbt/olist_dbt/target/
+dbt/olist_dbt/dbt_packages/
+dbt/olist_dbt/logs/
+
+# meltano / dagster / gx runtime
+ingestion/.meltano/
+orchestration/.dagster/
+orchestration/tmp*/
+quality/gx/
+quality/gx_results.json
+.dagster_home/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+*.egg-info/
+
+# secrets
+*.json.key
+service-account*.json
+.env

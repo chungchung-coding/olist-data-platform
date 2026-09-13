@@ -1,0 +1,60 @@
+# Meltano project: tap-csv -> target-bigquery (raw layer, all STRING columns)
+#
+#   pip install meltano
+#   cd ingestion && meltano install
+#   export TARGET_BIGQUERY_PROJECT=<gcp-project>
+#   export TARGET_BIGQUERY_CREDENTIALS_PATH=/abs/path/to/service-account.json
+#   meltano run tap-csv target-bigquery
+#
+# Entity names below == raw table names == dbt source table names.
+version: 1
+default_environment: dev
+project_id: olist-data-platform
+environments:
+  - name: dev
+plugins:
+  extractors:
+    - name: tap-csv
+      variant: meltanolabs
+      pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+      config:
+        files:
+          - entity: customers
+            path: ../data/raw/olist_customers_dataset.csv
+            keys: [customer_id]
+          - entity: geolocation
+            path: ../data/raw/olist_geolocation_dataset.csv
+            keys: [geolocation_zip_code_prefix, geolocation_lat, geolocation_lng]
+          - entity: order_items
+            path: ../data/raw/olist_order_items_dataset.csv
+            keys: [order_id, order_item_id]
+          - entity: order_payments
+            path: ../data/raw/olist_order_payments_dataset.csv
+            keys: [order_id, payment_sequential]
+          - entity: order_reviews
+            path: ../data/raw/olist_order_reviews_dataset.csv
+            keys: [review_id, order_id]
+          - entity: orders
+            path: ../data/raw/olist_orders_dataset.csv
+            keys: [order_id]
+          - entity: products
+            path: ../data/raw/olist_products_dataset.csv
+            keys: [product_id]
+          - entity: sellers
+            path: ../data/raw/olist_sellers_dataset.csv
+            keys: [seller_id]
+          - entity: product_category_translation
+            path: ../data/raw/product_category_name_translation.csv
+            keys: [product_category_name]
+  loaders:
+    - name: target-bigquery
+      variant: z3z1ma
+      pip_url: git+https://github.com/z3z1ma/target-bigquery.git
+      config:
+        project: ${TARGET_BIGQUERY_PROJECT}
+        dataset: olist_raw
+        location: US
+        method: batch_job
+        denormalized: true
+        flattening_enabled: true
+        credentials_path: ${TARGET_BIGQUERY_CREDENTIALS_PATH}

@@ -1,0 +1,66 @@
+version: 2
+models:
+  - name: dim_date
+    description: "Calendar dimension, one row per day 2016-2018."
+    columns:
+      - name: date_day
+        tests: [unique, not_null]
+  - name: dim_customers
+    description: "One row per customer_id (order-level id); customer_unique_id is the person."
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+      - name: customer_unique_id
+        tests: [not_null]
+  - name: dim_sellers
+    columns:
+      - name: seller_id
+        tests: [unique, not_null]
+  - name: dim_products
+    columns:
+      - name: product_id
+        tests: [unique, not_null]
+      - name: category
+        tests: [not_null]
+  - name: fact_order_items
+    description: "One row per order line; lowest-grain sales fact."
+    tests:
+      - dbt_utils_free_unique_combination:
+          arguments:
+            combination_of_columns: [order_id, order_item_id]
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - relationships: {arguments: {to: ref('fact_orders'), field: order_id}}
+      - name: product_id
+        tests:
+          - not_null
+          - relationships: {arguments: {to: ref('dim_products'), field: product_id}}
+      - name: seller_id
+        tests:
+          - not_null
+          - relationships: {arguments: {to: ref('dim_sellers'), field: seller_id}}
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships: {arguments: {to: ref('dim_customers'), field: customer_id}}
+      - name: purchase_date
+        tests:
+          - not_null
+          - relationships: {arguments: {to: ref('dim_date'), field: date_day}}
+      - name: total_item_value
+        tests: [not_null]
+  - name: fact_orders
+    description: "One row per order with item, payment, review and delivery-performance measures."
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships: {arguments: {to: ref('dim_customers'), field: customer_id}}
+      - name: order_status
+        tests: [not_null]
+      - name: purchase_date
+        tests: [not_null]

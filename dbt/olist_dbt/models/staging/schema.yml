@@ -1,0 +1,90 @@
+version: 2
+models:
+  - name: stg_customers
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+      - name: customer_unique_id
+        tests: [not_null]
+      - name: state
+        tests: [not_null]
+  - name: stg_sellers
+    columns:
+      - name: seller_id
+        tests: [unique, not_null]
+  - name: stg_geolocation
+    columns:
+      - name: zip_code_prefix
+        tests: [unique, not_null]
+  - name: stg_products
+    columns:
+      - name: product_id
+        tests: [unique, not_null]
+      - name: category
+        tests: [not_null]
+  - name: stg_orders
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+      - name: order_status
+        tests:
+          - accepted_values:
+              arguments:
+                values: [delivered, shipped, canceled, unavailable, invoiced, processing, created, approved]
+      - name: purchased_at
+        tests: [not_null]
+  - name: stg_order_items
+    tests:
+      - dbt_utils_free_unique_combination:
+          arguments:
+            combination_of_columns: [order_id, order_item_id]
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_orders')
+                field: order_id
+      - name: product_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_products')
+                field: product_id
+      - name: seller_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_sellers')
+                field: seller_id
+      - name: price
+        tests: [not_null]
+  - name: stg_order_payments
+    columns:
+      - name: order_id
+        tests: [not_null]
+      - name: payment_type
+        tests:
+          - accepted_values:
+              arguments:
+                values: [credit_card, boleto, voucher, debit_card, not_defined]
+  - name: stg_order_reviews
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: review_score
+        tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5]
+                quote: false

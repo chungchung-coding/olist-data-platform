@@ -1,0 +1,19 @@
+# Two targets, one codebase.
+#   dbt run --target duckdb    (local, out-of-core, no cloud account needed)
+#   dbt run --target bigquery  (cloud warehouse; needs GCP_PROJECT_ID + ADC login)
+olist_dbt:
+  target: "{{ env_var('DBT_TARGET', 'duckdb') }}"
+  outputs:
+    duckdb:
+      type: duckdb
+      path: "{{ env_var('DUCKDB_PATH', '../../data/warehouse/olist.duckdb') }}"
+      schema: olist
+      threads: 4
+    bigquery:
+      type: bigquery
+      method: oauth            # run `gcloud auth application-default login` first
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      dataset: olist
+      location: US
+      threads: 4
+      job_execution_timeout_seconds: 600

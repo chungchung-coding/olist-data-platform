@@ -1,0 +1,15 @@
+version: 2
+sources:
+  - name: olist_raw
+    description: "Raw Olist CSVs landed as-is (all columns STRING). Loaded by Meltano tap-csv (BigQuery) or ingestion/load_raw_duckdb.py (DuckDB)."
+    schema: olist_raw
+    tables:
+      - name: customers
+      - name: geolocation
+      - name: order_items
+      - name: order_payments
+      - name: order_reviews
+      - name: orders
+      - name: products
+      - name: sellers
+      - name: product_category_translation

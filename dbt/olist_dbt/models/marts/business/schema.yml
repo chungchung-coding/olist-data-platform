@@ -1,0 +1,38 @@
+version: 2
+models:
+  - name: customer_metrics
+    columns:
+      - name: customer_unique_id
+        tests: [unique, not_null]
+      - name: lifetime_value
+        tests: [not_null]
+      - name: customer_segment
+        tests:
+          - accepted_values:
+              arguments:
+                values: [gold, silver, repeat, lapsed, standard]
+  - name: monthly_sales
+    columns:
+      - name: month_start
+        tests: [unique, not_null]
+  - name: top_products_monthly
+    tests:
+      - dbt_utils_free_unique_combination:
+          arguments:
+            combination_of_columns: [month_start, product_id]
+    columns:
+      - name: revenue_rank
+        tests: [not_null]
+  - name: category_region_sales
+    tests:
+      - dbt_utils_free_unique_combination:
+          arguments:
+            combination_of_columns: [month_start, category, customer_state]
+  - name: delivery_performance_by_state
+    columns:
+      - name: customer_state
+        tests: [unique, not_null]
+  - name: seller_performance
+    columns:
+      - name: seller_id
+        tests: [unique, not_null]
