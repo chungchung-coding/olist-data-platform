@@ -1,6 +1,6 @@
 # Submission steps (follow in order)
 
-> **On Windows?** Use `docs/RUNBOOK_POWERSHELL.md` instead — it is the same four steps with PowerShell-native commands and `run_all.ps1` in place of `make`.
+> **On Windows?** Use `docs/RUNBOOK_WINDOWS.md` instead — it is the same four steps with PowerShell-native commands and `run_all.ps1` in place of `make`.
 
 ## A. Get the project onto your machine
 

@@ -5,14 +5,14 @@
     "total_revenue_2017": 7090569.24,
     "total_revenue_2018_ytd": 8593137.5,
     "strongest_month_of_year": 11,
-    "products_ever_in_top50": 634,
+    "products_ever_in_top50": 635,
     "products_in_top50_6plus_months": 21,
     "top50_categories": {
       "watches_gifts": 394154.0,
       "health_beauty": 332991.0,
       "computers_accessories": 269442.0,
       "computers": 205032.0,
-      "cool_stuff": 162797.0
+      "cool_stuff": 163537.0
     },
     "top_categories_overall": {
       "health_beauty": 1255695.0,
@@ -32,45 +32,45 @@
       "silver": {
         "customers": 23958,
         "revenue_share": 0.308,
-        "avg_ltv": 202.041
+        "avg_ltv": 202.193
       },
       "gold": {
-        "customers": 12084,
-        "revenue_share": 0.302,
-        "avg_ltv": 392.636
+        "customers": 12081,
+        "revenue_share": 0.301,
+        "avg_ltv": 392.48
       },
       "lapsed": {
         "customers": 23145,
         "revenue_share": 0.238,
-        "avg_ltv": 161.573
+        "avg_ltv": 161.539
       },
       "standard": {
-        "customers": 34938,
+        "customers": 34941,
         "revenue_share": 0.141,
-        "avg_ltv": 63.433
+        "avg_ltv": 63.436
       },
       "repeat": {
         "customers": 865,
         "revenue_share": 0.012,
-        "avg_ltv": 224.951
+        "avg_ltv": 224.858
       }
     },
     "repeat_customer_rate": 0.0304,
-    "gold_customers": 12084,
-    "gold_revenue_share": 0.3015,
+    "gold_customers": 12081,
+    "gold_revenue_share": 0.3013,
     "gold_top_states": {
-      "SP": 0.373,
+      "SP": 0.372,
       "RJ": 0.129,
       "MG": 0.116,
       "RS": 0.055,
       "PR": 0.052
     },
     "gold_top_categories": {
-      "watches_gifts": 478976.0,
-      "health_beauty": 470290.0,
-      "sports_leisure": 271648.0,
-      "computers_accessories": 238245.0,
-      "bed_bath_table": 237355.0
+      "watches_gifts": 477371.0,
+      "health_beauty": 469601.0,
+      "sports_leisure": 271773.0,
+      "computers_accessories": 238330.0,
+      "bed_bath_table": 237883.0
     },
     "sellers_for_80pct_revenue": 540,
     "seller_count": 3053

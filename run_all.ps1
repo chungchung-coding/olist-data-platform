@@ -51,7 +51,7 @@ function Invoke-Step {
 $csvCount = @(Get-ChildItem (Join-Path $root 'data\raw') -Filter *.csv -ErrorAction SilentlyContinue).Count
 if ($csvCount -lt 9) {
     Write-Host "Found $csvCount CSV files in data\raw - expected 9." -ForegroundColor Red
-    Write-Host 'Copy the Olist CSVs into data\raw before running. See docs\RUNBOOK_POWERSHELL.md step 1.3.'
+    Write-Host 'Copy the Olist CSVs into data\raw before running. See docs\RUNBOOK_WINDOWS.md step 1.2.'
     exit 1
 }
 Write-Host "Python:    $python"

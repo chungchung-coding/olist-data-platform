@@ -46,7 +46,7 @@ pip install -r requirements.txt
 .\run_all.ps1     # same pipeline; add -Clean to rebuild from scratch
 ```
 
-Step-by-step Windows walkthrough, including GitHub and CI: `docs/RUNBOOK_POWERSHELL.md`.
+Step-by-step Windows walkthrough, including GitHub and CI: **`docs/RUNBOOK_WINDOWS.md`**.
 
 `make all` is equivalent to:
 
