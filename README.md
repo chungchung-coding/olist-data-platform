@@ -18,23 +18,9 @@ Two business cases drive the design: **sales readiness** (when, what, where, for
 
 ## Quick start (local, no cloud account)
 
-**macOS / Linux**
+**Windows (PowerShell/VScode)**
 
-```bash
-git clone https://github.com/<you>/olist-data-platform.git
-cd olist-data-platform
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-
-# Put the nine Kaggle CSVs in data/raw/
-# (or: kaggle datasets download -d olistbr/brazilian-ecommerce -p data/raw --unzip)
-
-make all          # ingest → dbt run → dbt test → Great Expectations → charts (≈ 1 minute)
 ```
-
-**Windows (PowerShell)**
-
-```powershell
 git clone https://github.com/<you>/olist-data-platform.git
 cd olist-data-platform
 python -m venv .venv
@@ -50,7 +36,7 @@ Step-by-step Windows walkthrough, including GitHub and CI: **`docs/RUNBOOK_WINDO
 
 `make all` is equivalent to:
 
-```bash
+```
 python ingestion/load_raw_duckdb.py                     # raw layer, schema olist_raw
 cd dbt/olist_dbt && export DBT_PROFILES_DIR=.           # dbt project
 dbt run  --target duckdb                                # 8 staging views + 12 analytics tables
@@ -61,13 +47,13 @@ cd analysis && python run_analysis.py                   # charts + kpis.json in 
 
 Then open the notebooks:
 
-```bash
+```
 jupyter lab analysis/notebooks/01_sales_readiness.ipynb
 ```
 
 ## Orchestrated run (Dagster)
 
-```bash
+```
 cd orchestration
 dagster dev -f olist_dagster/definitions.py     # http://localhost:3000 — click "Materialize all"
 # or headless:
@@ -78,7 +64,7 @@ The graph has 31 assets (9 raw tables → 8 staging → 12 marts → quality gat
 
 ## Cloud run (BigQuery)
 
-```bash
+```
 pip install dbt-bigquery google-cloud-bigquery sqlalchemy-bigquery
 gcloud auth application-default login
 export GCP_PROJECT_ID=<your-project>
