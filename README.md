@@ -21,15 +21,25 @@ Two business cases drive the design: **sales readiness** (when, what, where, for
 **Windows (PowerShell/VScode)**
 
 ```
+<<<<<<< Updated upstream
 git clone https://github.com/<you>/olist-data-platform.git
 cd olist-data-platform
 python -m venv .venv
+=======
+
+**Windows (PowerShell)**
+
+```powershell
+>>>>>>> Stashed changes
 .\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+jupyter notebook
 
 # Put the nine Kaggle CSVs in data\raw\
 
-.\run_all.ps1     # same pipeline; add -Clean to rebuild from scratch
+Using folder:
+C:\Users\mbach\Documents\olist-data-platform\analysis\outputs
+
+Exists: True   # same pipeline; add -Clean to rebuild from scratch
 ```
 
 `make all` is equivalent to:
